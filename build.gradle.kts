@@ -1,6 +1,6 @@
-plugins {
+﻿plugins {
     kotlin("jvm") version "2.2.10"
-    id("com.typewritermc.module-plugin")
+    id("com.typewritermc.module-plugin") version "2.1.0"
 }
 
 group = "btc.renaud"
@@ -9,6 +9,9 @@ version = "0.1" // The version is the same with the plugin to avoid confusion. :
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://maven.enginehub.org/repo/")
+    flatDir {
+        dir("libs")
+    }
 }
 
 dependencies {
@@ -27,7 +30,7 @@ typewriter {
         description =
             "This extension adds support for GUI and Dialog (1.21.6 dialog system) to typewriter for create" +
             " easy different type of menus."
-        engineVersion = file("../../version.txt").readText().trim()
+        engineVersion = "0.9.0-beta-171"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
         dependencies {
             dependency("typewritermc", "Quest")
@@ -44,5 +47,6 @@ kotlin {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
     }
 }
+
 
 
