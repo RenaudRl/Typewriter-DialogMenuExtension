@@ -1,52 +1,36 @@
-﻿plugins {
-    kotlin("jvm") version "2.2.10"
+plugins {
+    kotlin("jvm") version "2.3.20"
     id("com.typewritermc.module-plugin") version "2.1.0"
 }
-
-group = "btc.renaud"
-version = "0.1" // The version is the same with the plugin to avoid confusion. :)
+group = "btcrenaud"
+version = "0.0.5"
 
 repositories {
-    maven("https://repo.papermc.io/repository/maven-public/")
-    maven("https://maven.enginehub.org/repo/")
-    flatDir {
-        dir("libs")
-    }
+    mavenLocal()
 }
 
 dependencies {
-    implementation("com.typewritermc:QuestExtension:0.9.0")
+    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+
     implementation("com.typewritermc:BasicExtension:0.9.0")
-    // Use Paper 1.21.7 which provides the Dialog API used by this extension
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
 }
 
 typewriter {
-    namespace = "renaud"
-
+    namespace = "btcrenaud"
     extension {
         name = "DialogMenu"
-        shortDescription = "Typewriter extension For DialogMenu support."
-        description =
-            "This extension adds support for GUI and Dialog (1.21.6 dialog system) to typewriter for create" +
-            " easy different type of menus."
-        engineVersion = "0.9.0-beta-171"
+        shortDescription = "Dialog menu system for TypeWriter"
+        description = "Dialog menu extension for TypeWriter providing advanced dialog menus with branching conversations and interactive NPC dialogue."
+        engineVersion = "0.9.0-beta-174"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
-        dependencies {
-            dependency("typewritermc", "Quest")
-        }
         paper()
-
+        dependencies {}
     }
-
 }
+
+    
 
 kotlin {
-    jvmToolchain(21)
-    compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
-    }
+    jvmToolchain(25)
+    
 }
-
-
-
