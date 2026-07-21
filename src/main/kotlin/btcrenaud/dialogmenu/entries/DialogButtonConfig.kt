@@ -1,9 +1,11 @@
 package btcrenaud.dialogmenu.entries
 
 import com.typewritermc.core.books.pages.Colors
+import com.typewritermc.core.entries.Ref
 import com.typewritermc.core.extension.annotations.AlgebraicTypeInfo
 import com.typewritermc.core.extension.annotations.Help
 import com.typewritermc.core.extension.annotations.Placeholder
+import com.typewritermc.engine.paper.entry.TriggerableEntry
 import com.typewritermc.engine.paper.entry.entries.ConstVar
 import com.typewritermc.engine.paper.entry.entries.Var
 
@@ -20,6 +22,16 @@ data class ActionButtonConfig(
     val command: Var<String> = ConstVar(""),
     @Help("Whether to execute the command as OP.")
     val asOp: Var<Boolean> = ConstVar(false),
+) : DialogButtonConfig
+
+/** A button firing Typewriter triggers directly, without going through a command. */
+@AlgebraicTypeInfo("trigger_button", Colors.CYAN, "fa6-solid:bolt")
+data class TriggerButtonConfig(
+    @Placeholder
+    @Help("Text displayed on the button.")
+    val label: Var<String> = ConstVar(""),
+    @Help("Entries triggered when the button is clicked.")
+    val triggers: List<Ref<TriggerableEntry>> = emptyList(),
 ) : DialogButtonConfig
 
 /** Exit button closing the dialog. */
@@ -42,7 +54,10 @@ data class TextInputButtonConfig(
     @Help("Label displayed above the text input.")
     val label: Var<String> = ConstVar(""),
     @Placeholder
-    @Help("Command template executed when the confirmation button is clicked. Use $(input) to insert the value.")
+    @Help("Key used to insert the value in the command. Default: 'input'.")
+    val key: Var<String> = ConstVar(DialogKey.INPUT.key),
+    @Placeholder
+    @Help("Command template executed when the confirmation button is clicked. Use $(<key>) to insert the value.")
     val command: Var<String> = ConstVar(""),
     @Help("Whether to execute the command as OP.")
     val asOp: Var<Boolean> = ConstVar(false),
@@ -90,10 +105,13 @@ data class MultipleChoiceButtonConfig(
     @Help("Label displayed above the options.")
     val label: Var<String> = ConstVar(""),
     @Placeholder
+    @Help("Key used to insert the selected option in the command. Default: 'choice'.")
+    val key: Var<String> = ConstVar(DialogKey.CHOICE.key),
+    @Placeholder
     @Help("Comma separated options. Append * to mark the initial option.")
     val options: Var<String> = ConstVar(""),
     @Placeholder
-    @Help("Command template executed when the confirmation button is clicked. Use $(choice) to insert the selected option.")
+    @Help("Command template executed when the confirmation button is clicked. Use $(<key>) to insert the selected option.")
     val command: Var<String> = ConstVar(""),
     @Help("Whether to execute the command as OP.")
     val asOp: Var<Boolean> = ConstVar(false),

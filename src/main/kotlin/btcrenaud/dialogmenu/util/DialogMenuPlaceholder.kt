@@ -66,7 +66,9 @@ object DialogMenuPlaceholder : PlaceholderHandler, Listener, Reloadable, Initial
     override suspend fun unload() {
         Bukkit.getOnlinePlayers().forEach { player ->
             if (active.remove(player.uniqueId) != null) {
-                player.closeInventory()
+                // Dialogs are not inventories: close the dialog itself, on the
+                // player's scheduler so it is safe on both Paper and Folia.
+                player.scheduler.run(plugin, { _ -> player.closeDialog() }, null)
             }
         }
     }

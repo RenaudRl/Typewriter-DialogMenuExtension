@@ -3,7 +3,7 @@ plugins {
     id("com.typewritermc.module-plugin") version "2.1.0"
 }
 group = "btcrenaud"
-version = "0.0.5"
+version = "0.0.6"
 
 repositories {
     mavenLocal()
@@ -21,7 +21,7 @@ typewriter {
         name = "DialogMenu"
         shortDescription = "Dialog menu system for TypeWriter"
         description = "Dialog menu extension for TypeWriter providing advanced dialog menus with branching conversations and interactive NPC dialogue."
-        engineVersion = "0.9.0-beta-174"
+        engineVersion = "0.9.0-beta-175"
         channel = com.typewritermc.moduleplugin.ReleaseChannel.BETA
         paper()
         dependencies {}
@@ -31,6 +31,6 @@ typewriter {
     
 
 kotlin {
-    jvmToolchain(25)
-    
+    jvmToolchain(21)
 }
+
